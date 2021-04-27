@@ -55,11 +55,12 @@ with open(args.playbook, 'r') as pbook_yaml:
 # Collect YAMLs and READMEs
 #
 for role in pbook_vars:
-    role_path = os.path.join(os.path.dirname(os.path.normpath(args.playbook)), 'roles', role)
     files_to_check[role] = []
+    role_path = os.path.join(os.path.dirname(os.path.normpath(args.playbook)), 'roles', role)
+    role_readme = os.path.join(role_path,'README.md')
+    if os.path.isfile(role_readme):
+        files_to_check[role].append(role_readme)
     for root, dirs, files in os.walk(role_path):
-        if 'README.md' in files:
-            files_to_check[role].append(os.path.join(root, 'README.md'))
         root_base = os.path.basename(os.path.normpath(root))
         if root_base in ('vars', 'defaults'):
             for f in files:
@@ -218,5 +219,5 @@ if not args.quiet:
 #
 # Single integer output
 #
-if args.quiet and issues_count > 0:
+if args.quiet:
     print(issues_count)
