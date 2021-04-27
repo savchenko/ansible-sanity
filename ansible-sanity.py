@@ -11,6 +11,9 @@ from re import match
 from itertools import chain
 
 
+#
+# Setup arguments parser
+#
 parser = argparse.ArgumentParser(prog='ansible-sanity',
                                  description='Sanity-checks between role, its playbooks and readme files.')
 parser.add_argument('-p', '--playbook', help="Path to the playbook .YML file")
@@ -18,6 +21,9 @@ parser.add_argument('-q', '--quiet', action='store_true', help="Output number of
 args = parser.parse_args()
 
 
+#
+# Check user-supplied data
+#
 if args.playbook and args.playbook.endswith('.yml'):
     if os.path.isfile(args.playbook):
         pbook_dir = os.path.basename(os.path.normpath(args.playbook))
@@ -30,7 +36,7 @@ else:
 # Variables present in a playbook
 pbook_vars = {}
 
-# Variables obtained from vars/defaults YAMLs
+# Variables obtained from vars/defaults YAMLs and READMEs
 collected_vars = {}
 
 # List of YAMLs within ../vars/* and ../defaults/*
@@ -163,45 +169,45 @@ issues_count = len(
 #
 if not args.quiet:
     for role in issues:
-        # Role/playbook issues
+        # Role/playbook
         for issue in issues[role].keys():
             if len(issues[role][issue]) > 0:
                 print('\n[%s]' % role)
                 break
         if len(issues[role]['absent']) > 0:
             print('''
-            Declared in role, but missing in the playbook:
+            Declared in the role, but missing in the playbook:
             ''')
             for var in issues[role]['absent']:
                 print('\t -', var)
         if len(issues[role]['undeclared']) > 0:
             print('''
-            Declared in playbook, but undeclared in the role:
+            Declared in the playbook, but undeclared in the role:
             ''')
             for var in issues[role]['undeclared']:
                 print('\t -', var)
         if len(issues[role]['defaults']) > 0:
             print('''
-            Declared in playbook that are overwriting defaults:
+            Declared in the playbook and are overwriting defaults:
             ''')
             for var in issues[role]['defaults']:
                 print('\t -', var)
-        # Readme issues
+        # Readme
         if len(issues[role]['readme_not-in-readme']) > 0:
             print('''
-            Declared in role, but absent in Readme:
+            Declared in the role, but absent in its README.md:
             ''')
             for var in issues[role]['readme_not-in-readme']:
                 print('\t -', var)
         if len(issues[role]['readme_not-in-role']) > 0:
             print('''
-            Declared in Readme, but absent in role:
+            Declared in the README.md, but absent in the role:
             ''')
             for var in issues[role]['readme_not-in-role']:
                 print('\t -', var)
         if len(issues[role]['readme_not-in-pbook']) > 0:
             print('''
-            Declared in Readme, but absent in playbook:
+            Declared in the README.md, but absent in the playbook:
             ''')
             for var in issues[role]['readme_not-in-pbook']:
                 print('\t -', var)

@@ -14,7 +14,7 @@ optional arguments:
   -q, --quiet           Output number of issues only
 ```
 
-Check if any variable:
+Checks if any variable:
 
 1. Declared in playbook and overwriting defaults
 1. Declared in playbook, but undeclared in role
