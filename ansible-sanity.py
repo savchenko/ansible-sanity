@@ -100,7 +100,7 @@ for role in files_to_check:
             with open(f, 'r') as f_readme:
                 f_lines = f_readme.readlines()
                 for ln in f_lines:
-                    if match("^\|\s+\w+\s+\|\s+.*\|$", ln):
+                    if match("^\|\s+\w+\s+\|\s+[^|]+\s+\|\s+[^|]+\s+\|$", ln):
                         if not match("\|\s+Variable\s+\|\s+Description\s+\|\s+Default\s+\|", ln):
                             collected_vars[role][f_type].append(ln.split('|')[1].strip())
             f_readme.close()
