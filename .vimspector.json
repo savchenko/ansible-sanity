@@ -1,0 +1,21 @@
+// https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+{
+  "configurations": {
+    "<name>: Launch": {
+      "adapter": "debugpy",
+      "configuration": {
+        "name": "debugpy",
+        "type": "python",
+        "request": "launch",
+        "python": "/usr/bin/python",
+        "stopOnEntry": true,
+        "console": "internalConsole",
+        "justMyCode": true,
+        "debugOptions": [],
+        "program": "${file}",
+        "args": ["-d", "~/code/staging/roles"]
+      }
+    }
+  }
+}
+
