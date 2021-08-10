@@ -50,11 +50,15 @@ for f in ymls:
                         ln = ''.join(oldline)
                         f_changed = True
             if 'yes' in ln.lower():
+                ln_orig = ln
                 ln = re.sub(r": yes$", ': True', ln)
-                f_changed = True
+                if ln != ln_orig:
+                    f_changed = True
             if 'no' in ln.lower():
+                ln_orig = ln
                 ln = re.sub(r": no$", ': False', ln)
-                f_changed = True
+                if ln != ln_orig:
+                    f_changed = True
             f_newlines.append(ln)
         if f_changed:
             fop.seek(0, 0)
