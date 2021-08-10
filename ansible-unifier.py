@@ -49,16 +49,12 @@ for f in ymls:
                         [str(x) for x in oldline]
                         ln = ''.join(oldline)
                         f_changed = True
-            if 'yes' in ln.lower():
-                ln_orig = ln
-                ln = re.sub(r": yes$", ': True', ln)
-                if ln != ln_orig:
-                    f_changed = True
-            if 'no' in ln.lower():
-                ln_orig = ln
-                ln = re.sub(r": no$", ': False', ln)
-                if ln != ln_orig:
-                    f_changed = True
+            for repl in (('yes', 'True'), ('no', 'False')):
+                if repl[0] in ln.lower():
+                    ln_orig = ln
+                    ln = re.sub(r': %s$' % (repl[0]), ': %s' % (repl[1]), ln)
+                    if ln != ln_orig:
+                        f_changed = True
             f_newlines.append(ln)
         if f_changed:
             fop.seek(0, 0)
