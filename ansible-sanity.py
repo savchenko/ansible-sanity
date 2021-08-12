@@ -188,36 +188,36 @@ if issues_count > 0:
             # Role/playbook
             for issue in issues[role].keys():
                 if len(issues[role][issue]) > 0:
-                    print('\n\033[92m[%s]\033[0m\n' % role)
+                    print('\n\033[92m[%s]\033[0m' % role)
                     break
             if len(issues[role]['absent']) > 0:
-                print('Declared in the role, but missing in the playbook:\n')
+                print('\nDeclared in the role, but missing in the playbook:\n')
                 for var in issues[role]['absent']:
                     print('\t -', var)
             if len(issues[role]['undeclared']) > 0:
-                print('Declared in the playbook, but undeclared in the role:\n')
+                print('\nDeclared in the playbook, but undeclared in the role:\n')
                 for var in issues[role]['undeclared']:
                     print('\t -', var)
             if len(issues[role]['defaults']) > 0:
-                print('Declared in the playbook and are overwriting defaults:\n')
+                print('\nDeclared in the playbook and are overwriting defaults:\n')
                 for var in issues[role]['defaults']:
                     print('\t -', var)
             # Readme
             if len(issues[role]['readme_not-in-readme']) > 0:
-                print('Declared in the role, but absent in its README.md:\n')
+                print('\nDeclared in the role, but absent in its README.md:\n')
                 for var in issues[role]['readme_not-in-readme']:
                     print('\t -', var)
             if len(issues[role]['readme_not-in-role']) > 0:
-                print('Declared in the README.md, but absent in the role:\n')
+                print('\nDeclared in the README.md, but absent in the role:\n')
                 for var in issues[role]['readme_not-in-role']:
                     print('\t -', var)
             if len(issues[role]['readme_not-in-pbook']) > 0:
-                print('Declared in the README.md, but absent in the playbook:\n')
+                print('\nDeclared in the README.md, but absent in the playbook:\n')
                 for var in issues[role]['readme_not-in-pbook']:
                     print('\t -', var)
             # Type mismatch
             if len(issues[role]['type_mismatch']) > 0:
-                print('Type mismatch between the playbook and role:\n')
+                print('\nType mismatch between the playbook and role:\n')
                 for var in issues[role]['type_mismatch']:
                     print('\t -', var)
     print('\n\033[91m%s issues in total.\033[0m\n' % issues_count)
