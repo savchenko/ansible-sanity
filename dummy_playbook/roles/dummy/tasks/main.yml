@@ -1,0 +1,53 @@
+---
+- name: Echo variables
+  debug:
+    msg: |
+      {{ integer }}
+      {{ float }}
+      {{ string_single }}
+      {{ string_double }}
+      {{ string_single_empty }}
+      {{ string_double_empty }}
+      {{ string_single_unicode }}
+      {{ string_double_unicode }}
+      {{ bool_capitalised }}
+      {{ bool_lowercase }}
+      {{ bool_uppercase }}
+      {{ bool_mixed }}
+      {{ list_empty }}
+      {{ list_nonempty }}
+      {{ list_nested }}
+      {{ list_multiline }}
+      {{ dictionary_empty }}
+      {{ dictionary_nonempty }}
+      {{ dictionary_nested }}
+      {{ e_overwrites_defaults }}
+      {{ e_declared_in_playbook_underclared_in_role }}
+      {{ e_declared_in_role_undeclared_in_playbook }}
+      {{ e_declared_in_role_undeclared_in_readme }}
+      {{ e_declared_in_readme_undeclared_in_role }}
+      {{ e_declared_in_readme_undeclared_in_playbook }}
+      {{ e_type_mismatch }}
+
+- name: Test `become` without `become_user`
+  debug:
+    msg: 'Become who?..'
+  become: yes
+
+- name: Test `become_user` without `become`
+  debug:
+    msg: 'Become maybe?'
+  become_user: maybe
+
+- debug:
+    msg: 'Nameless task'
+
+
+- block:
+
+  - name: Inside of the unnamed block
+    debug:
+      var: ansible_env.HOME
+
+
+  when: True

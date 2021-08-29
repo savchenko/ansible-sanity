@@ -1,0 +1,45 @@
+---
+- hosts:
+    - localhost
+
+  tasks:
+  - name: Import dummy role
+    import_role:
+      name: dummy
+    tags: role_dummy
+    vars:
+      integer: 42
+      float: 19.1459
+      string_single: 'Single-quoted string'
+      string_double: "Double-quoted string"
+      string_single_empty: ''
+      string_double_empty: ""
+      string_single_unicode: '±¶µ'
+      string_double_unicode: "±¶µ"
+      bool_capitalised: True
+      bool_lowercase: true
+      bool_uppercase: TRUE
+      bool_mixed: tRuE
+      list_empty: []
+      list_nonempty: ['elem_A', 'elem_B', 'elem_C']
+      list_nested: ['elem_A-top', ['elem_B-nested', 'elem_C-nested']]
+      list_multiline:
+        - One
+        - 1
+        - 1.0
+      dictionary_empty: {}
+      dictionary_nonempty: {'key': 'value'}
+      dictionary_nested: {
+      'top_key': {
+        'nested_key': {
+          'nested_value': {
+            'varanother': 'vardictionary'
+            }
+          }
+        }
+      }
+      e_overwrites_defaults: true                       # Declared in playbook, overwrites defaults
+      e_declared_in_playbook_underclared_in_role: true  # Declared in playbook, undeclared in role
+      e_declared_in_role_undeclared_in_readme: true     # Declared in role, absent in Readme
+      e_declared_in_readme_undeclared_in_role: true     # Declared in Readme, absent in role
+      e_type_mismatch: []                               # Type mismatch between playbook and role

@@ -1,0 +1,37 @@
+---
+integer: 01
+float: 78.2036
+string_single: 'Vars single string'
+string_double: "Vars double string"
+string_single_empty: ''
+string_double_empty: ""
+string_single_unicode: '»½'
+string_double_unicode: "»½"
+bool_capitalised: False
+bool_lowercase: false
+bool_uppercase: FALSE
+bool_mixed: fAlSe
+list_empty: []
+list_nonempty: ['vars_elem_A', 'vars_elem_B', 'vars_elem_C']
+list_nested: ['vars_elem_A-top', ['vars_elem_B-nested', 'vars_elem_C-nested']]
+list_multiline:
+  - Two
+  - 2
+  - 2.0
+dictionary_empty: {}
+dictionary_nonempty: {'varkey': 'varvalue'}
+dictionary_nested: {
+'top_key': {
+  'nested_key': {
+    'nested_value': {
+      'varanother': 'vardictionary'
+      }
+    }
+  }
+}
+e_overwrites_defaults: true                       # Declared in playbook, overwrites defaults
+e_declared_in_role_undeclared_in_playbook: true   # Declared in role, absent in playbook
+e_declared_in_role_undeclared_in_readme: true     # Declared in role, absent in Readme
+e_declared_in_readme_undeclared_in_playbook: true # Declared in Readme, absent in playbook
+e_type_mismatch: {}                               # Type mismatch between playbook and role
+
