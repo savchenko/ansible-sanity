@@ -8,6 +8,7 @@ from argparse import ArgumentParser
 from ast import literal_eval
 from itertools import chain
 from re import match
+
 from yaml import safe_load as yaml_safe_load
 from yaml.scanner import ScannerError
 
@@ -54,7 +55,6 @@ if args.playbook and args.playbook.endswith('.yml'):
 else:
     parser.print_usage()
     os._exit(os.EX_NOINPUT)
-
 
 #
 # Fail gracefully
@@ -294,7 +294,7 @@ for role in collected['playbook']:
                         )
                     )
                 # Become-no-user
-                if collected['roles'][role]['tasks'][f][task_number]['become'] is not None and \
+                if collected['roles'][role]['tasks'][f][task_number]['become'] not in [None, False] and \
                         not isinstance(collected['roles'][role]['tasks'][f][task_number]['become_user'], str):
                             collected['issues'][role]['become_without_become-user'].append(
                                 '(%s/%s) "%s" from %s' % (
